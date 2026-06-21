@@ -424,3 +424,28 @@ test split.
   - FastText training script.
   - BERT soft pseudo training script.
   - Mixup branches inside the main BERT/DPCNN/TextCNN training scripts.
+
+## Project Refactor, 2026-06-21
+
+- Reorganized the CNN project into a script-plus-package structure:
+  - reusable modules: `src/agnews_dpcnn/{data,models,training,metrics,probabilities}.py`
+  - CLI entrypoints remain in `scripts/`
+- Removed duplicated code from DPCNN/TextCNN training and probability fusion
+  scripts. Tokenization, TSV loading, vocab construction, macro-F1, probability
+  IO, LR schedules, distillation loss, and checkpoint writers now have one
+  shared implementation.
+- Preserved the original training outputs and metric JSON/TSV formats, so old
+  experiment records remain comparable.
+- Added `--max-train-examples`, `--max-valid-examples`, and
+  `--max-test-examples` to `train_textcnn.py` for quick smoke tests; defaults
+  are unchanged.
+- Added repository-level and CNN-project README files describing layout,
+  reproduction commands, final retained results, and report assets.
+- Updated `reports/agnews_report_package.zip` so the submission archive includes
+  the refactored scripts and `src/agnews_dpcnn` package.
+- Verification:
+  - `python -m compileall agnews_dpcnn/scripts agnews_dpcnn/src`
+  - CPU smoke train for DPCNN on 80/40/40 examples
+  - CPU smoke train for TextCNN on 80/40/40 examples
+  - smoke checks for `ensemble_probs.py`, `blend_probabilities.py`, and
+    `sweep_blend_probabilities.py`

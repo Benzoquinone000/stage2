@@ -3,11 +3,17 @@
 from __future__ import annotations
 
 import argparse
-import csv
 import json
 from pathlib import Path
+import sys
 
 import torch
+
+SRC = Path(__file__).resolve().parents[1] / "src"
+sys.path.insert(0, str(SRC))
+
+from agnews_dpcnn.metrics import read_probs, write_predictions
+from agnews_dpcnn.probabilities import evaluate_probs, iter_simplex_weights, validate_step
 
 
 def parse_args() -> argparse.Namespace:
@@ -20,65 +26,11 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def read_probs(path: str | Path) -> tuple[torch.Tensor, torch.Tensor]:
-    labels = []
-    probs = []
-    with Path(path).open("r", encoding="utf-8", newline="") as f:
-        reader = csv.DictReader(f, delimiter="\t")
-        for row in reader:
-            labels.append(int(row["label"]))
-            probs.append([float(row[f"prob_{idx}"]) for idx in range(4)])
-    return torch.tensor(labels, dtype=torch.long), torch.tensor(probs, dtype=torch.float32)
-
-
-def macro_f1(preds: torch.Tensor, labels: torch.Tensor, num_classes: int = 4) -> float:
-    scores = []
-    for cls in range(num_classes):
-        pred_pos = preds == cls
-        true_pos = labels == cls
-        tp = (pred_pos & true_pos).sum().item()
-        fp = (pred_pos & ~true_pos).sum().item()
-        fn = (~pred_pos & true_pos).sum().item()
-        precision = tp / (tp + fp) if tp + fp else 0.0
-        recall = tp / (tp + fn) if tp + fn else 0.0
-        scores.append(2 * precision * recall / (precision + recall) if precision + recall else 0.0)
-    return float(sum(scores) / len(scores))
-
-
-def nll(probs: torch.Tensor, labels: torch.Tensor) -> float:
-    chosen = probs[torch.arange(labels.numel()), labels].clamp_min(1e-12)
-    return float((-chosen.log()).mean().item())
-
-
-def write_predictions(path: Path, labels: torch.Tensor, probs: torch.Tensor) -> None:
-    preds = probs.argmax(dim=-1)
-    with path.open("w", encoding="utf-8", newline="") as f:
-        writer = csv.writer(f, delimiter="\t", lineterminator="\n")
-        writer.writerow(["id", "label", "prediction", "prob_0", "prob_1", "prob_2", "prob_3"])
-        for idx, (label, pred, row) in enumerate(zip(labels.tolist(), preds.tolist(), probs.tolist())):
-            writer.writerow([idx, label, pred, *[f"{value:.8f}" for value in row]])
-
-
-def iter_weights(num_models: int, units: int):
-    def visit(prefix: list[int], remaining: int, slots_left: int):
-        if slots_left == 1:
-            yield tuple([*prefix, remaining])
-            return
-        for value in range(remaining + 1):
-            yield from visit([*prefix, value], remaining - value, slots_left - 1)
-
-    for row in visit([], units, num_models):
-        yield tuple(value / units for value in row)
-
-
 def main() -> None:
     args = parse_args()
     if len(args.prob_files) != len(args.names):
         raise ValueError("--prob-files and --names must have the same length")
-    units_float = 1.0 / args.step
-    units = round(units_float)
-    if args.step <= 0 or abs(units - units_float) > 1e-6:
-        raise ValueError("--step must be positive and divide 1.0 exactly")
+    units = validate_step(args.step)
 
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -93,28 +45,22 @@ def main() -> None:
         elif not torch.equal(labels, current_labels):
             raise ValueError(f"label/order mismatch: {prob_file}")
         probs_list.append(probs)
-        preds = probs.argmax(dim=-1)
         per_model.append(
             {
                 "name": name,
                 "prob_file": prob_file,
-                "valid_loss": nll(probs, current_labels),
-                "valid_accuracy": float((preds == current_labels).float().mean().item()),
-                "valid_macro_f1": macro_f1(preds, current_labels),
+                **evaluate_probs(probs, current_labels, prefix="valid"),
             }
         )
     assert labels is not None
 
     best = None
     top = []
-    for weights in iter_weights(len(probs_list), units):
+    for weights in iter_simplex_weights(len(probs_list), units):
         blended = sum(weight * probs for weight, probs in zip(weights, probs_list))
-        preds = blended.argmax(dim=-1)
         row = {
             "weights": {name: weight for name, weight in zip(args.names, weights)},
-            "valid_loss": nll(blended, labels),
-            "valid_accuracy": float((preds == labels).float().mean().item()),
-            "valid_macro_f1": macro_f1(preds, labels),
+            **evaluate_probs(blended, labels, prefix="valid"),
         }
         top.append(row)
         if best is None or row["valid_macro_f1"] > best["valid_macro_f1"]:

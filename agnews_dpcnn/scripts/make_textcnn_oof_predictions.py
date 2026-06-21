@@ -3,14 +3,19 @@
 from __future__ import annotations
 
 import argparse
-import csv
 import json
 from pathlib import Path
+import sys
 
 import torch
 
-from train_dpcnn import macro_f1_from_preds
-from train_textcnn import TextCNN, evaluate, make_loader, read_tsv
+SRC = Path(__file__).resolve().parents[1] / "src"
+sys.path.insert(0, str(SRC))
+
+from agnews_dpcnn.data import load_vocab, make_loader, read_tsv
+from agnews_dpcnn.metrics import accuracy_from_preds, macro_f1, probability_nll, write_predictions
+from agnews_dpcnn.models import TextCNN
+from agnews_dpcnn.training import evaluate
 
 
 def parse_args() -> argparse.Namespace:
@@ -23,35 +28,6 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
     parser.add_argument("--amp", action="store_true")
     return parser.parse_args()
-
-
-def probability_nll(probs: torch.Tensor, labels: torch.Tensor) -> float:
-    chosen = probs[torch.arange(labels.numel()), labels].clamp_min(1e-12)
-    return float((-chosen.log()).mean().item())
-
-
-def accuracy_from_probs(probs: torch.Tensor, labels: torch.Tensor) -> float:
-    return float((probs.argmax(dim=-1) == labels).float().mean().item())
-
-
-def write_predictions(path: Path, labels: torch.Tensor, probs: torch.Tensor, fold_ids: torch.Tensor) -> None:
-    preds = probs.argmax(dim=-1)
-    with path.open("w", encoding="utf-8", newline="") as f:
-        writer = csv.writer(f, delimiter="\t", lineterminator="\n")
-        writer.writerow(["id", "fold", "label", "prediction", "prob_0", "prob_1", "prob_2", "prob_3"])
-        for idx, (fold, label, pred, row) in enumerate(
-            zip(fold_ids.tolist(), labels.tolist(), preds.tolist(), probs.tolist())
-        ):
-            writer.writerow([idx, fold, label, pred, *[f"{value:.8f}" for value in row]])
-
-
-def load_vocab(path: Path) -> dict[str, int]:
-    vocab: dict[str, int] = {}
-    with path.open("r", encoding="utf-8") as f:
-        for line in f:
-            row = json.loads(line)
-            vocab[row["token"]] = int(row["id"])
-    return vocab
 
 
 def load_model(fold_dir: Path, device: str) -> tuple[TextCNN, dict[str, int], dict]:
@@ -96,18 +72,15 @@ def main() -> None:
             "checkpoint": str(fold_dir),
             "valid_file": str(valid_file),
             "valid_loss": probability_nll(probs, labels),
-            "valid_accuracy": accuracy_from_probs(probs, labels),
-            "valid_macro_f1": macro_f1_from_preds(preds, labels),
+            "valid_accuracy": accuracy_from_preds(preds, labels),
+            "valid_macro_f1": macro_f1(preds, labels),
             "num_examples": int(labels.numel()),
         }
         per_fold.append(row)
         probs_chunks.append(probs)
         label_chunks.append(labels)
         fold_chunks.append(torch.full_like(labels, fold))
-        print(
-            f"fold_{fold}: valid_acc={row['valid_accuracy']:.6f} "
-            f"valid_f1={row['valid_macro_f1']:.6f}"
-        )
+        print(f"fold_{fold}: valid_acc={row['valid_accuracy']:.6f} valid_f1={row['valid_macro_f1']:.6f}")
         del model
         if args.device.startswith("cuda"):
             torch.cuda.empty_cache()
@@ -115,12 +88,13 @@ def main() -> None:
     probs_all = torch.cat(probs_chunks)
     labels_all = torch.cat(label_chunks)
     fold_ids = torch.cat(fold_chunks)
+    preds_all = probs_all.argmax(dim=-1)
     metrics = {
         "num_folds": args.num_folds,
         "num_examples": int(labels_all.numel()),
         "valid_loss": probability_nll(probs_all, labels_all),
-        "valid_accuracy": accuracy_from_probs(probs_all, labels_all),
-        "valid_macro_f1": macro_f1_from_preds(probs_all.argmax(dim=-1), labels_all),
+        "valid_accuracy": accuracy_from_preds(preds_all, labels_all),
+        "valid_macro_f1": macro_f1(preds_all, labels_all),
         "per_fold": per_fold,
     }
     (output_dir / "oof_metrics.json").write_text(json.dumps(metrics, indent=2), encoding="utf-8")
