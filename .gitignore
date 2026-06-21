@@ -1,0 +1,41 @@
+# Python/cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+*.egg-info/
+*.ipynb
+
+# Logs and trackers
+wandb/
+logs/
+*.log
+
+# Large data/checkpoints
+data/
+outputs/
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.ckpt
+*.onnx
+*.npy
+*.npz
+
+# Archives
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+*.rar
+*.zip
+
+# Keep the small report package for submission convenience.
+!agnews_dpcnn/reports/agnews_report_package.zip
+
+# Local/editor
+.DS_Store
+.env
+*.secret
+*.key

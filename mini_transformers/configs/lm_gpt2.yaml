@@ -1,0 +1,17 @@
+task:
+  name: causal_language_modeling
+  metric: perplexity
+
+data:
+  dataset_name: wikitext2
+  text_column: text
+  block_size: 128
+
+model:
+  base_config: configs/gpt2_small.yaml
+
+training:
+  output_dir: outputs/checkpoints/lm_gpt2
+  batch_size: 8
+  learning_rate: 0.00005
+  num_epochs: 3

@@ -1,0 +1,28 @@
+task:
+  name: machine_translation
+  metric: bleu
+
+data:
+  dataset_name: iwslt
+  source_lang: en
+  target_lang: de
+  max_source_length: 128
+  max_target_length: 128
+
+model:
+  model_type: transformer_mt
+  src_vocab_size: 32000
+  tgt_vocab_size: 32000
+  hidden_size: 512
+  num_encoder_layers: 6
+  num_decoder_layers: 6
+  num_attention_heads: 8
+  intermediate_size: 2048
+  dropout: 0.1
+
+training:
+  output_dir: outputs/checkpoints/mt_transformer
+  batch_size: 32
+  learning_rate: 0.0005
+  num_epochs: 10
+  warmup_steps: 4000

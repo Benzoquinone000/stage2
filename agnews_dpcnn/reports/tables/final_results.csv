@@ -1,0 +1,8 @@
+method,selection,weights,test_macro_f1,test_accuracy,source
+BERT-base scratch5,single,-,0.9287944134150254,0.928947389125824,ensemble_metrics.json
+DPCNN5-b5,single,-,0.9303645794859707,0.93039470911026,ensemble_metrics.json
+TextCNN5-wide,single,-,0.9241742494125894,0.9243420958518982,ensemble_metrics.json
+BERT+DPCNN,OOF validation,0.461/0.539,0.9411195607182403,0.9411842226982117,oof_selected_2model
+BERT+DPCNN,test sweep ablation,0.393/0.607,0.9420565421264203,0.942105233669281,test sweep
+BERT+DPCNN+TextCNN,OOF validation,0.42/0.40/0.18,0.9411109238294695,0.9411842226982117,oof_selected_3model
+BERT+DPCNN+TextCNN,test sweep upper bound,0.408/0.580/0.012,0.942186452016416,0.9422368407249451,test sweep

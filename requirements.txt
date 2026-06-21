@@ -1,0 +1,19 @@
+# Install from this directory:
+#   python -m pip install -r requirements.txt
+
+# Local model/tokenizer package used by agnews_classification.
+-e ./mini_transformers
+
+# Core runtime.
+torch>=2.2
+numpy>=1.24,<3
+PyYAML>=6.0
+tqdm>=4.66
+wandb>=0.17
+
+# Optional mini_transformers features and evaluation helpers.
+sacrebleu>=2.4
+sentencepiece>=0.2
+
+# Development and smoke-test runner.
+pytest>=8.0

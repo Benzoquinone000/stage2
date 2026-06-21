@@ -1,0 +1,12 @@
+Language models read tokens and predict the next token.
+The model learns patterns from text.
+Small datasets are useful for checking code.
+Good training code makes tensors easy to inspect.
+Attention lets each token look at earlier tokens.
+The tiny model will not be smart, but it should run.
+Language modeling is the first task in this mini transformers project.
+The input ids become embeddings.
+The hidden states pass through attention and feed forward layers.
+The loss compares model logits with the next token labels.
+After training, perplexity tells us how surprised the model is.
+This tiny corpus is only for debugging the full pipeline.

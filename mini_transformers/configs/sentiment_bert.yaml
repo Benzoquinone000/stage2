@@ -1,0 +1,19 @@
+task:
+  name: sentiment_analysis
+  metric: accuracy
+
+data:
+  dataset_name: sst2
+  text_column: sentence
+  label_column: label
+  max_length: 128
+
+model:
+  base_config: configs/bert_base.yaml
+  num_labels: 2
+
+training:
+  output_dir: outputs/checkpoints/sentiment_bert
+  batch_size: 16
+  learning_rate: 0.00003
+  num_epochs: 3
