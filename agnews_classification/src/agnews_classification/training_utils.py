@@ -91,7 +91,8 @@ def record_experiment(
     """Append a lightweight experiment record for later comparison."""
 
     output_path = Path(output_dir)
-    report_dir = Path(__file__).resolve().parent / "reports"
+    task_dir = Path(__file__).resolve().parents[2]
+    report_dir = task_dir / "reports"
     report_dir.mkdir(parents=True, exist_ok=True)
     record = {
         "timestamp_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),

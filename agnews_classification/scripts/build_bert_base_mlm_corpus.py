@@ -22,9 +22,10 @@ import zipfile
 
 
 TASK_DIR = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(TASK_DIR))
+TASK_SRC = TASK_DIR / "src"
+sys.path.insert(0, str(TASK_SRC))
 
-from task2_text_cleaning import clean_text, dedupe_key
+from agnews_classification.text_cleaning import clean_text, dedupe_key
 
 
 WIKITEXT_URL = "https://s3.amazonaws.com/research.metamind.io/wikitext/wikitext-103-raw-v1.zip"

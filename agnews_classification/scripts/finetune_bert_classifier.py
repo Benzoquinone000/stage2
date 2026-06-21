@@ -17,14 +17,15 @@ from torch.utils.data import DataLoader, Dataset
 
 ROOT = Path(__file__).resolve().parents[2]
 TASK_DIR = Path(__file__).resolve().parents[1]
+TASK_SRC = TASK_DIR / "src"
 PACKAGE_SRC = ROOT / "mini_transformers" / "src"
-sys.path.insert(0, str(TASK_DIR))
+sys.path.insert(0, str(TASK_SRC))
 sys.path.insert(0, str(PACKAGE_SRC))
 
 from mini_transformers.configs import BertConfig
 from mini_transformers.models import BertForMaskedLM, BertForSequenceClassification
 from mini_transformers.tokenization import load_tokenizer, save_tokenizer
-from task2_utils import (
+from agnews_classification.training_utils import (
     DataCollatorWithPadding,
     add_wandb_args,
     accuracy,

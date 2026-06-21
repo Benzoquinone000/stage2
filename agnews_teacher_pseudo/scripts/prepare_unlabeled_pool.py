@@ -9,10 +9,10 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[2]
-AGNEWS_DIR = ROOT / "agnews_classification"
-sys.path.insert(0, str(AGNEWS_DIR))
+AGNEWS_SRC = ROOT / "agnews_classification" / "src"
+sys.path.insert(0, str(AGNEWS_SRC))
 
-from task2_text_cleaning import clean_text, dedupe_key
+from agnews_classification.text_cleaning import clean_text, dedupe_key
 
 
 def parse_args() -> argparse.Namespace:

@@ -13,9 +13,10 @@ from typing import Iterable
 
 
 TASK_DIR = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(TASK_DIR))
+TASK_SRC = TASK_DIR / "src"
+sys.path.insert(0, str(TASK_SRC))
 
-from task2_text_cleaning import clean_text, dedupe_key
+from agnews_classification.text_cleaning import clean_text, dedupe_key
 
 
 LABEL_NAMES = {

@@ -14,13 +14,14 @@ from torch.utils.data import DataLoader
 
 ROOT = Path(__file__).resolve().parents[2]
 TASK_DIR = Path(__file__).resolve().parents[1]
+TASK_SRC = TASK_DIR / "src"
 PACKAGE_SRC = ROOT / "mini_transformers" / "src"
-sys.path.insert(0, str(TASK_DIR))
+sys.path.insert(0, str(TASK_SRC))
 sys.path.insert(0, str(PACKAGE_SRC))
 
 from ensemble_bert_classifiers import TextClassificationDataset, collate, predict_probs, probability_nll
 from mini_transformers.tokenization import load_tokenizer
-from task2_utils import accuracy, macro_f1
+from agnews_classification.training_utils import accuracy, macro_f1
 
 
 def parse_args() -> argparse.Namespace:

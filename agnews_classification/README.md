@@ -3,7 +3,17 @@
 This directory contains the Task2 AG News pipeline. The reusable BERT/model
 implementation lives in the sibling `mini_transformers` package; this project
 contains data preparation, task-specific training loops, experiment scripts, and
-reports.
+branch-local experiment logs.
+
+## Layout
+
+```text
+agnews_classification/
+  configs/                  BERT configuration files
+  scripts/                  data, pretraining, fine-tuning, and ensemble CLIs
+  src/agnews_classification/ shared task utilities and text cleaning helpers
+  reports/                  BERT-branch experiment logs
+```
 
 ## Current Best
 
@@ -102,7 +112,7 @@ Regenerate the experiment report:
 python scripts/summarize_experiments.py
 ```
 
-The main report is:
+The BERT-branch experiment log is:
 
 ```text
 reports/experiment_log.md
@@ -112,6 +122,12 @@ Short notes for removed or abandoned branches are kept in:
 
 ```text
 reports/abandoned_directions.md
+```
+
+The final task report and submission package live at the repository root:
+
+```text
+../reports/
 ```
 
 ## What Was Removed
