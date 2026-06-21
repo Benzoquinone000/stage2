@@ -32,7 +32,7 @@ outputs/
 *.zip
 
 # Keep the small report package for submission convenience.
-!agnews_dpcnn/reports/agnews_report_package.zip
+!reports/agnews_report_package.zip
 
 # Local/editor
 .DS_Store

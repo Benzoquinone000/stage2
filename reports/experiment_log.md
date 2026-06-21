@@ -443,6 +443,9 @@ test split.
   reproduction commands, final retained results, and report assets.
 - Updated `reports/agnews_report_package.zip` so the submission archive includes
   the refactored scripts and `src/agnews_dpcnn` package.
+- Moved final task reports, figures, result tables, and the submission archive
+  from `agnews_dpcnn/reports/` to the repository-level `reports/` directory, so
+  `agnews_dpcnn/` now represents only the CNN experiment branch.
 - Verification:
   - `python -m compileall agnews_dpcnn/scripts agnews_dpcnn/src`
   - CPU smoke train for DPCNN on 80/40/40 examples

@@ -8,8 +8,8 @@ report uses AG News rather than CIFAR-100 and compares three retained branches:
 - TextCNN 5-fold ensemble with a wider multi-kernel setup
 
 Large datasets, checkpoints, logs, and generated output directories are ignored
-by Git. The compact report package and tables under `reports/` are kept for
-submission and review.
+by Git. Project-level reports, figures, tables, and the submission archive live
+in the repository-level `../reports/` directory.
 
 ## Layout
 
@@ -17,7 +17,6 @@ submission and review.
 agnews_dpcnn/
   scripts/                 command-line experiment entrypoints
   src/agnews_dpcnn/        reusable data/model/training/metric modules
-  reports/                 final report, figures, result tables, experiment log
 ```
 
 The training scripts are intentionally thin. Shared implementation lives in:
@@ -50,7 +49,7 @@ folds/fold_*/valid.tsv
 ```
 
 Pseudo-label TSV files used by the stronger CNN experiments are stored locally
-under the ignored data directory and described in `reports/experiment_log.md`.
+under the ignored data directory and described in `../reports/experiment_log.md`.
 
 ## Run
 
@@ -133,12 +132,12 @@ Fold-level validation summary:
 
 ## Report Materials
 
-- Detailed report: `reports/agnews_final_report_detailed.md`
-- Experiment log: `reports/experiment_log.md`
-- Tables: `reports/tables/`
-- Figures: `reports/figures/`
-- Submission archive: `reports/agnews_report_package.zip`
+- Detailed report: `../reports/agnews_final_report_detailed.md`
+- Experiment log: `../reports/experiment_log.md`
+- Tables: `../reports/tables/`
+- Figures: `../reports/figures/`
+- Submission archive: `../reports/agnews_report_package.zip`
 
 The report states which branches used no external pretrained weights and which
 experiments used pseudo labels or distillation. Keep new results in the same
-tables and append concise notes to `reports/experiment_log.md`.
+tables and append concise notes to `../reports/experiment_log.md`.

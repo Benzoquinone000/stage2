@@ -9,24 +9,25 @@ tuning, pseudo labels, and probability-level ensemble analysis.
 
 ```text
 agnews_classification/     BERT scratch pretraining and classifier experiments
-agnews_dpcnn/              DPCNN/TextCNN experiments, fusion scripts, report
+agnews_dpcnn/              DPCNN/TextCNN experiments and fusion scripts
 agnews_teacher_pseudo/     teacher-model pseudo-label generation utilities
 mini_transformers/         local Transformer implementation used by BERT branch
+reports/                   final task report, figures, tables, and package
 requirements.txt           Python dependencies
 ```
 
 The main report and submission materials are in:
 
 ```text
-agnews_dpcnn/reports/
+reports/
 ```
 
 Important files:
 
-- `agnews_dpcnn/reports/agnews_final_report_detailed.md`
-- `agnews_dpcnn/reports/experiment_log.md`
-- `agnews_dpcnn/reports/tables/final_results.csv`
-- `agnews_dpcnn/reports/agnews_report_package.zip`
+- `reports/agnews_final_report_detailed.md`
+- `reports/experiment_log.md`
+- `reports/tables/final_results.csv`
+- `reports/agnews_report_package.zip`
 
 ## Setup
 
