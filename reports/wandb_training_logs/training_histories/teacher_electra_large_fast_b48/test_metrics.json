@@ -1,0 +1,8 @@
+{
+  "model_name": "google/electra-large-discriminator",
+  "best_valid_macro_f1": 0.9574151020226056,
+  "best_epoch": 3,
+  "test_loss": 0.17659542877423137,
+  "test_accuracy": 0.9501315951347351,
+  "test_macro_f1": 0.9501004194824153
+}

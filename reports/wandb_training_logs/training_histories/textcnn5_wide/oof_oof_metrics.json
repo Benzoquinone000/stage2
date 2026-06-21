@@ -1,0 +1,54 @@
+{
+  "num_folds": 5,
+  "num_examples": 119731,
+  "valid_loss": 0.25596609711647034,
+  "valid_accuracy": 0.9220335483551025,
+  "valid_macro_f1": 0.9218987918178813,
+  "per_fold": [
+    {
+      "fold": 0,
+      "checkpoint": "outputs/textcnn_pseudo_t098_bal12k_5fold_wide_cosine_short_lr8e4/fold_0",
+      "valid_file": "../agnews_classification/data/processed_clean/folds/fold_0/valid.tsv",
+      "valid_loss": 0.2630070149898529,
+      "valid_accuracy": 0.9210789799690247,
+      "valid_macro_f1": 0.9208600801828383,
+      "num_examples": 23948
+    },
+    {
+      "fold": 1,
+      "checkpoint": "outputs/textcnn_pseudo_t098_bal12k_5fold_wide_cosine_short_lr8e4/fold_1",
+      "valid_file": "../agnews_classification/data/processed_clean/folds/fold_1/valid.tsv",
+      "valid_loss": 0.2550705075263977,
+      "valid_accuracy": 0.9215800762176514,
+      "valid_macro_f1": 0.9215287474986639,
+      "num_examples": 23948
+    },
+    {
+      "fold": 2,
+      "checkpoint": "outputs/textcnn_pseudo_t098_bal12k_5fold_wide_cosine_short_lr8e4/fold_2",
+      "valid_file": "../agnews_classification/data/processed_clean/folds/fold_2/valid.tsv",
+      "valid_loss": 0.2588982582092285,
+      "valid_accuracy": 0.9206130504608154,
+      "valid_macro_f1": 0.9204741819203721,
+      "num_examples": 23946
+    },
+    {
+      "fold": 3,
+      "checkpoint": "outputs/textcnn_pseudo_t098_bal12k_5fold_wide_cosine_short_lr8e4/fold_3",
+      "valid_file": "../agnews_classification/data/processed_clean/folds/fold_3/valid.tsv",
+      "valid_loss": 0.24740009009838104,
+      "valid_accuracy": 0.9244101047515869,
+      "valid_macro_f1": 0.9243231549050007,
+      "num_examples": 23945
+    },
+    {
+      "fold": 4,
+      "checkpoint": "outputs/textcnn_pseudo_t098_bal12k_5fold_wide_cosine_short_lr8e4/fold_4",
+      "valid_file": "../agnews_classification/data/processed_clean/folds/fold_4/valid.tsv",
+      "valid_loss": 0.25545385479927063,
+      "valid_accuracy": 0.9224858283996582,
+      "valid_macro_f1": 0.922319803800297,
+      "num_examples": 23944
+    }
+  ]
+}

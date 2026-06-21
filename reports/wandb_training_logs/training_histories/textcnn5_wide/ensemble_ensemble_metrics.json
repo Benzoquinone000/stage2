@@ -1,0 +1,38 @@
+{
+  "num_models": 5,
+  "test_loss": 0.25228846073150635,
+  "test_accuracy": 0.9243420958518982,
+  "test_macro_f1": 0.9241742494125894,
+  "per_model": [
+    {
+      "prob_file": "outputs/textcnn_pseudo_t098_bal12k_5fold_wide_cosine_short_lr8e4/fold_0/test_probs.tsv",
+      "test_loss": 0.27099496126174927,
+      "test_accuracy": 0.9182894825935364,
+      "test_macro_f1": 0.9181213221420987
+    },
+    {
+      "prob_file": "outputs/textcnn_pseudo_t098_bal12k_5fold_wide_cosine_short_lr8e4/fold_1/test_probs.tsv",
+      "test_loss": 0.25939011573791504,
+      "test_accuracy": 0.9215789437294006,
+      "test_macro_f1": 0.921559849992245
+    },
+    {
+      "prob_file": "outputs/textcnn_pseudo_t098_bal12k_5fold_wide_cosine_short_lr8e4/fold_2/test_probs.tsv",
+      "test_loss": 0.26794934272766113,
+      "test_accuracy": 0.917236864566803,
+      "test_macro_f1": 0.9170912187763134
+    },
+    {
+      "prob_file": "outputs/textcnn_pseudo_t098_bal12k_5fold_wide_cosine_short_lr8e4/fold_3/test_probs.tsv",
+      "test_loss": 0.2582652270793915,
+      "test_accuracy": 0.9225000143051147,
+      "test_macro_f1": 0.9224569804006396
+    },
+    {
+      "prob_file": "outputs/textcnn_pseudo_t098_bal12k_5fold_wide_cosine_short_lr8e4/fold_4/test_probs.tsv",
+      "test_loss": 0.26140546798706055,
+      "test_accuracy": 0.9190789461135864,
+      "test_macro_f1": 0.9189522966900858
+    }
+  ]
+}

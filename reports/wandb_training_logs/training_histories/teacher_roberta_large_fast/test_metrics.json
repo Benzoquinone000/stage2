@@ -1,0 +1,8 @@
+{
+  "model_name": "roberta-large",
+  "best_valid_macro_f1": 0.9531637334566974,
+  "best_epoch": 3,
+  "test_loss": 0.18403700837179235,
+  "test_accuracy": 0.9513157606124878,
+  "test_macro_f1": 0.9513244864145438
+}

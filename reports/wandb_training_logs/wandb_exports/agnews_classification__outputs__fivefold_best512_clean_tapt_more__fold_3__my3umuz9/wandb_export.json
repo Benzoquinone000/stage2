@@ -1,0 +1,17 @@
+{
+  "run_id": "my3umuz9",
+  "source_hint": "agnews_classification/outputs/fivefold_best512_clean_tapt_more/fold_3",
+  "local_run_dir": "agnews_classification/outputs/fivefold_best512_clean_tapt_more/fold_3/wandb/run-20260614_183235-my3umuz9",
+  "export_note": "Sanitized W&B export. Raw .wandb files, debug logs, host, email, and hardware UUID metadata are intentionally excluded.",
+  "config": {},
+  "summary": {},
+  "output_tail": [
+    "device: cuda",
+    "loaded MLM checkpoint: outputs/bert_mlm_news_augmented_tapt_more_512x8_len128",
+    "classification train/valid/test: 95,786/23,945/7,600",
+    "sample limits: train=full, valid=full, test=full",
+    "parameters: 40,911,364",
+    "effective batch: 128; amp=True",
+    "epoch 01 train_loss=0.5488 train_acc=0.8145 valid_loss=0.3353 valid_acc=0.8855 valid_f1=0.8863 time=51.1s"
+  ]
+}

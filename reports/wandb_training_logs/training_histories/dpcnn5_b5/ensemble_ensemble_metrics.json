@@ -1,0 +1,38 @@
+{
+  "num_models": 5,
+  "test_loss": 0.23520806431770325,
+  "test_accuracy": 0.93039470911026,
+  "test_macro_f1": 0.9303645794859707,
+  "per_model": [
+    {
+      "prob_file": "outputs/dpcnn_pseudo_t098_bal12k_5fold_b5_do065_lr6e4/fold_0/test_probs.tsv",
+      "test_loss": 0.27399638295173645,
+      "test_accuracy": 0.9193421006202698,
+      "test_macro_f1": 0.9191830181398017
+    },
+    {
+      "prob_file": "outputs/dpcnn_pseudo_t098_bal12k_5fold_b5_do065_lr6e4/fold_1/test_probs.tsv",
+      "test_loss": 0.25339317321777344,
+      "test_accuracy": 0.9222368597984314,
+      "test_macro_f1": 0.922273343209306
+    },
+    {
+      "prob_file": "outputs/dpcnn_pseudo_t098_bal12k_5fold_b5_do065_lr6e4/fold_2/test_probs.tsv",
+      "test_loss": 0.2728474736213684,
+      "test_accuracy": 0.9200000166893005,
+      "test_macro_f1": 0.9200959416758988
+    },
+    {
+      "prob_file": "outputs/dpcnn_pseudo_t098_bal12k_5fold_b5_do065_lr6e4/fold_3/test_probs.tsv",
+      "test_loss": 0.2610330283641815,
+      "test_accuracy": 0.9173684120178223,
+      "test_macro_f1": 0.9174603841978177
+    },
+    {
+      "prob_file": "outputs/dpcnn_pseudo_t098_bal12k_5fold_b5_do065_lr6e4/fold_4/test_probs.tsv",
+      "test_loss": 0.2584819793701172,
+      "test_accuracy": 0.9209210276603699,
+      "test_macro_f1": 0.9206918152446286
+    }
+  ]
+}

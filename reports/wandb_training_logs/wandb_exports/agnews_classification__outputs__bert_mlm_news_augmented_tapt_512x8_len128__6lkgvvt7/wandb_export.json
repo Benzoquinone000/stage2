@@ -1,0 +1,44 @@
+{
+  "run_id": "6lkgvvt7",
+  "source_hint": "agnews_classification/outputs/bert_mlm_news_augmented_tapt_512x8_len128",
+  "local_run_dir": "agnews_classification/outputs/bert_mlm_news_augmented_tapt_512x8_len128/wandb/run-20260613_200902-6lkgvvt7",
+  "export_note": "Sanitized W&B export. Raw .wandb files, debug logs, host, email, and hardware UUID metadata are intentionally excluded.",
+  "config": {
+    "batch_size": 96,
+    "bert_config": "configs/bert_base.json",
+    "device": "cuda",
+    "epochs": 3,
+    "heads": 8,
+    "hidden_size": 512,
+    "layers": 8,
+    "learning_rate": 0.0001,
+    "max_grad_norm": 1,
+    "max_length": 128,
+    "mlm_probability": 0.15,
+    "output_dir": "outputs/bert_mlm_news_augmented_tapt_512x8_len128",
+    "scheduler": "cosine",
+    "seed": 42,
+    "vocab_size": 30000,
+    "warmup_steps": 300,
+    "weight_decay": 0.01
+  },
+  "summary": {
+    "mlm/valid_perplexity": 158.77480437942418,
+    "mlm/valid_loss": 5.067486873626709,
+    "optimizer/learning_rate": 0,
+    "mlm/train_loss": 5.207188244713677,
+    "mlm/seconds": 124.67120364680886,
+    "epoch": 3,
+    "mlm/best_valid_loss": 5.067486873626709
+  },
+  "output_tail": [
+    "device: cuda",
+    "mlm train/valid: 108,000/12,000",
+    "sample limits: train=full, valid=full",
+    "vocab size: 30,000",
+    "parameters: 41,202,992",
+    "epoch 01 train_loss=5.4932 valid_loss=5.3001 valid_ppl=200.37 time=124.8s",
+    "epoch 02 train_loss=5.3143 valid_loss=5.1565 valid_ppl=173.56 time=124.8s",
+    "epoch 03 train_loss=5.2072 valid_loss=5.0675 valid_ppl=158.77 time=124.7s"
+  ]
+}

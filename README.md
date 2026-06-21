@@ -27,6 +27,7 @@ Important files:
 - `reports/agnews_final_report_detailed.md`
 - `reports/experiment_log.md`
 - `reports/tables/final_results.csv`
+- `reports/wandb_training_logs/`
 - `reports/agnews_report_package.zip`
 
 ## Setup
@@ -45,6 +46,8 @@ Large local artifacts are ignored by Git:
 
 This keeps the repository suitable for code/report review while preserving the
 run commands and experiment records needed for reproduction.
+Sanitized W&B summaries and epoch histories are committed separately under
+`reports/wandb_training_logs/`.
 
 ## Final Result Summary
 

@@ -1,0 +1,8 @@
+{
+  "best_epoch": 3,
+  "best_valid_macro_f1": 0.9215287474986639,
+  "test_loss": 0.25939326433758986,
+  "test_accuracy": 0.9215789437294006,
+  "test_macro_f1": 0.921559849992245,
+  "epochs_completed": 7
+}

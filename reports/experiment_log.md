@@ -459,3 +459,20 @@ test split.
   - CPU smoke train for TextCNN on 80/40/40 examples
   - smoke checks for `ensemble_probs.py`, `blend_probabilities.py`, and
     `sweep_blend_probabilities.py`
+
+## W&B Training Log Export, 2026-06-21
+
+- Added reviewable training logs under `reports/wandb_training_logs/`.
+- Included:
+  - epoch-level histories, configs, and metric JSON files for the final retained
+    BERT-base scratch5, DPCNN5-b5, and TextCNN5-wide five-fold runs
+  - representative teacher-model training/test records
+  - sanitized W&B export JSON files containing safe hyperparameters, metric
+    summaries, and short redacted output tails
+- Intentionally excluded raw W&B run folders because local W&B caches can include
+  binary `.wandb` records, debug logs, absolute machine paths, host names, email
+  addresses, GPU UUIDs, and other environment metadata.
+- Verification:
+  - scanned `reports/wandb_training_logs/` for common sensitive patterns such as
+    W&B API tokens, email addresses, host names, GPU UUIDs, and absolute local
+    paths

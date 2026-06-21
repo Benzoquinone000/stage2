@@ -1,0 +1,42 @@
+{
+  "run_id": "hyj4h25p",
+  "source_hint": "agnews_classification/outputs/bert_classifier_soft_pseudo_base_large_eq_t098_bal8k_w02_lr8e6_512x8_len128",
+  "local_run_dir": "agnews_classification/outputs/bert_classifier_soft_pseudo_base_large_eq_t098_bal8k_w02_lr8e6_512x8_len128/wandb/run-20260620_151258-hyj4h25p",
+  "export_note": "Sanitized W&B export. Raw .wandb files, debug logs, host, email, and hardware UUID metadata are intentionally excluded.",
+  "config": {
+    "amp": true,
+    "device": "cuda",
+    "early_stopping_patience": 1,
+    "epochs": 4,
+    "label_smoothing": 0.02,
+    "learning_rate": "8e-06",
+    "max_grad_norm": 1,
+    "max_length": 128,
+    "output_dir": "outputs/bert_classifier_soft_pseudo_base_large_eq_t098_bal8k_w02_lr8e6_512x8_len128",
+    "seed": 82,
+    "test_file": "data/processed_clean/agnews_test.tsv",
+    "valid_file": "data/processed_clean/agnews_valid.tsv",
+    "warmup_steps": 50,
+    "weight_decay": 0.01
+  },
+  "summary": {
+    "soft_pseudo/train_gold_accuracy": 0.963746921182266,
+    "test/loss": 0.24519456257945613,
+    "test/accuracy": 0.9242105484008789,
+    "soft_pseudo/valid_accuracy": 0.9218880534172058,
+    "optimizer/learning_rate": 1.321027399881145e-06,
+    "soft_pseudo/valid_loss": 0.24094374628493262,
+    "epoch": 3,
+    "soft_pseudo/train_loss": 0.24360183945723943,
+    "test/macro_f1": 0.9240859489553522,
+    "soft_pseudo/valid_macro_f1": 0.9218406941194786
+  },
+  "output_tail": [
+    "gold/pseudo/valid/test: 117,337/26,043/2,394/7,600",
+    "steps_per_epoch=203; pseudo_loss_weight=0.2",
+    "epoch 01 train_loss=0.2670 gold_acc=0.9646 valid_loss=0.2415 valid_acc=0.9215 valid_f1=0.9214 time=18.8s",
+    "epoch 02 train_loss=0.2444 gold_acc=0.9655 valid_loss=0.2414 valid_acc=0.9223 valid_f1=0.9223 time=18.0s",
+    "epoch 03 train_loss=0.2436 gold_acc=0.9637 valid_loss=0.2409 valid_acc=0.9219 valid_f1=0.9218 time=18.0s",
+    "early stopping after epoch 03; best_epoch=02 best_valid_f1=0.922251"
+  ]
+}

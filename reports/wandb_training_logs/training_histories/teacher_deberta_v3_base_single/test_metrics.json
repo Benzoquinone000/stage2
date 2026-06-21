@@ -1,0 +1,7 @@
+{
+  "model_name": "microsoft/deberta-v3-base",
+  "best_valid_macro_f1": 0.9493761332574265,
+  "test_loss": 0.19679094210659204,
+  "test_accuracy": 0.9474999904632568,
+  "test_macro_f1": 0.9474767703626925
+}

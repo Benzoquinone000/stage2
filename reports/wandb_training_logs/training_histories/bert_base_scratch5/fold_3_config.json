@@ -1,0 +1,22 @@
+{
+  "mlm_checkpoint": "outputs/bert_base_scratch_mlm_text8_full_e6_then_agnews_tapt_e4_len128",
+  "max_length": 128,
+  "batch_size": 64,
+  "gradient_accumulation_steps": 1,
+  "epochs": 12,
+  "learning_rate": 3e-05,
+  "weight_decay": 0.01,
+  "max_grad_norm": 1.0,
+  "scheduler": "cosine",
+  "warmup_steps": 500,
+  "best_metric": "valid_macro_f1",
+  "label_smoothing": 0.02,
+  "rdrop_alpha": 0.0,
+  "layerwise_lr_decay": 1.0,
+  "classifier_lr_multiplier": 1.0,
+  "dropout_prob": 0.15,
+  "early_stopping_patience": 4,
+  "amp": true,
+  "seed": 45,
+  "device": "cuda"
+}
